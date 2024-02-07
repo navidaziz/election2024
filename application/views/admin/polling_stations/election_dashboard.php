@@ -86,6 +86,7 @@ $candidates = $this->db->query($query)->result();
                                 <tr>
                                     <th>#</th>
                                     <th>Symbol</th>
+                                    <th>Image</th>
                                     <th>Candidate</th>
                                     <th style="text-align: center;">Total Votes</th>
                                 </tr>
@@ -100,6 +101,8 @@ $candidates = $this->db->query($query)->result();
                                     <tr>
                                         <th><?php echo $count++; ?></th>
                                         <td><?php echo file_type(base_url("assets/uploads/" . $candidate->symbol), 20, 20); ?></td>
+                                        <td><?php echo file_type(base_url("assets/uploads/" . $candidate->image), 20, 20); ?></td>
+
                                         <th><?php echo $candidate->name; ?></th>
                                         <th style="text-align: center;"><?php echo $candidate->total; ?></th>
                                     </tr>
@@ -114,7 +117,7 @@ $candidates = $this->db->query($query)->result();
                                 $total_polling_stations = $this->db->query($query)->row()->total;
                                 ?>
 
-                                <h4>Total Polling Stations: <?php echo $total_polling_stations; ?></h4>
+                                <strong>Total Polling Stations: <?php echo $total_polling_stations; ?></strong>
                                 <?php
                                 $query = "SELECT  COUNT( DISTINCT r.polling_station_id) as total
                                     FROM `election_results` as r 
@@ -126,7 +129,7 @@ $candidates = $this->db->query($query)->result();
                                     $result_added = 0;
                                 }
                                 ?>
-                                <h3>Result Received: <?php echo $result_added; ?></h3>
+                                <h5>Total Result Received: <?php echo $result_added; ?></h5>
 
 
                                 <?php
@@ -138,7 +141,74 @@ $candidates = $this->db->query($query)->result();
                                 <div class="progress" style="height: 20px !important;">
                                     <div class="progress-bar" role="progressbar" style="width: <?php echo $percentage; ?>%;" aria-valuenow="<?php echo $percentage; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $percentage; ?>%</div>
                                 </div>
-                                <br />
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <?php
+                                        $query = "SELECT COUNT(*) as total FROM polling_stations
+                                            WHERE district = 'Chitral Upper'";
+                                        $total_polling_stations = $this->db->query($query)->row()->total;
+                                        ?>
+                                        <h6>Upper Chitral - Total PS: <strong><?php echo $total_polling_stations; ?></strong></h6>
+                                        <?php
+                                        $query = "SELECT  COUNT( DISTINCT r.polling_station_id) as total
+                                                FROM `election_results` as r 
+                                                INNER JOIN polling_stations as s ON(s.polling_station_id = r.polling_station_id)
+                                                WHERE  s.district = 'Chitral Upper'
+                                                HAVING total > 0 ;";
+                                        if ($this->db->query($query)->row()) {
+                                            $result_added = $this->db->query($query)->row()->total;
+                                        } else {
+                                            $result_added = 0;
+                                        }
+                                        ?>
+                                        <h6>Result Received: <strong><?php echo $result_added; ?></strong> </h6>
+
+                                        <?php
+                                        $percentage = 0;
+                                        if ($total_polling_stations > 0) {
+                                            $percentage = round(($result_added * 100) / $total_polling_stations, 2);
+                                        } ?>
+
+                                        <div class="progress" style="height: 20px !important;">
+                                            <div class="progress-bar" role="progressbar" style="width: <?php echo $percentage; ?>%;" aria-valuenow="<?php echo $percentage; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $percentage; ?>%</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <?php
+                                        $query = "SELECT COUNT(*) as total FROM polling_stations
+                                            WHERE district = 'Chitral Lower'";
+                                        $total_polling_stations = $this->db->query($query)->row()->total;
+                                        ?>
+                                        <h6>Lower Chitral - Total PS: <strong><?php echo $total_polling_stations; ?></strong></h6>
+                                        <?php
+                                        $query = "SELECT  COUNT( DISTINCT r.polling_station_id) as total
+                                                FROM `election_results` as r 
+                                                INNER JOIN polling_stations as s ON(s.polling_station_id = r.polling_station_id)
+                                                WHERE  s.district = 'Chitral Lower'
+                                                HAVING total > 0 ;";
+                                        if ($this->db->query($query)->row()) {
+                                            $result_added = $this->db->query($query)->row()->total;
+                                        } else {
+                                            $result_added = 0;
+                                        }
+                                        ?>
+                                        <h6>Result Received: <strong><?php echo $result_added; ?></strong> </h6>
+
+                                        <?php
+                                        $percentage = 0;
+                                        if ($total_polling_stations > 0) {
+                                            $percentage = round(($result_added * 100) / $total_polling_stations, 2);
+                                        } ?>
+
+                                        <div class="progress" style="height: 20px !important;">
+                                            <div class="progress-bar" role="progressbar" style="width: <?php echo $percentage; ?>%;" aria-valuenow="<?php echo $percentage; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $percentage; ?>%</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                                 <p style="text-align: center;">
                                     Design and Developed By <strong> <i>Navid Aziz</i></strong> # 0324 4424424
                                 </p>
@@ -149,7 +219,7 @@ $candidates = $this->db->query($query)->result();
                     <div class="col-md-8">
                         <div class="block_div">
                             <h4>Polling Station Wise Result Updates</h4>
-                            <marquee direction="up" style="height: 500px;">
+                            <marquee onmouseover="this.stop();" onmouseout="this.start();" direction="up" style="height: 500px;">
                                 <div class="list-group">
                                     <?php
                                     $query = "SELECT s.polling_station, s.polling_station_id, 

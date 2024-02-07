@@ -96,6 +96,7 @@ $candidates = $this->db->query($query)->result();
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>District</th>
                                             <th>Polling Station</th>
                                             <?php foreach ($candidates as $candidate) { ?>
                                                 <th><?php echo $candidate->name     ?></th>
@@ -109,6 +110,7 @@ $candidates = $this->db->query($query)->result();
                                     foreach ($polling_stations as $polling_station) { ?>
                                         <tr>
                                             <th><?php echo $count++; ?></th>
+                                            <th><?php echo $polling_station->district ?></th>
                                             <th><?php echo $polling_station->polling_station ?></th>
                                             <?php foreach ($candidates as $candidate) { ?>
                                                 <td style="text-align: center;"><?php
