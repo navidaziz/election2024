@@ -81,7 +81,7 @@ $candidates = $this->db->query($query)->result();
                 <div class="row">
                     <div class="col-md-4">
                         <div class="block_div">
-                            <h4><strong><?php echo $system_global_settings[0]->system_title ?></strong>/;</h4>
+                            <h4><strong><?php echo $system_global_settings[0]->system_title ?></strong></h4>
                             <h4>Top Candidates List</h4>
                             <table class="table ">
                                 <tr>
