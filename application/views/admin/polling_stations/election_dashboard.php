@@ -83,6 +83,7 @@ $candidates = $this->db->query($query)->result();
                         <div class="block_div">
                             <h4><strong><?php echo $system_global_settings[0]->system_title ?></strong></h4>
                             <h4>Top Candidates List</h4>
+                            <h5 style="text-align: center; color:red">غیر حتمی ۔ غیر سرکاری نتائج</h5>
                             <table class="table ">
                                 <tr>
                                     <th>#</th>
@@ -210,7 +211,9 @@ $candidates = $this->db->query($query)->result();
 
                                 </div>
 
-
+                                <p style="text-align: center;">
+                                    Design and Developed By <strong> <i>Navid Aziz</i></strong> # 0324 4424424
+                                </p>
                             </div>
                         </div>
 
