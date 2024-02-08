@@ -224,7 +224,7 @@ $candidates = $this->db->query($query)->result();
                             <marquee onmouseover="this.stop();" onmouseout="this.start();" direction="up" style="height: 661px;">
                                 <div class="list-group">
                                     <?php
-                                    $query = "SELECT s.polling_station, s.polling_station_id, 
+                                    $query = "SELECT s.polling_station, s.district, s.polling_station_id, 
                                 SUM(r.votes) as total,
                                 r.last_update
                                           FROM `election_results` as r 
@@ -242,7 +242,7 @@ $candidates = $this->db->query($query)->result();
 
                                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
                                             <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1 pull-left"><strong><?php echo $polling_station->polling_station; ?></strong></h5>
+                                                <h5 class="mb-1 pull-left"><strong><?php echo $polling_station->district; ?> - <?php echo $polling_station->polling_station; ?></strong></h5>
                                                 <small class="pull-right">Last Update: <?php echo date("h:m:s a", strtotime($polling_station->last_update)); ?></small>
                                             </div>
                                             <p class="mb-1">
