@@ -210,9 +210,7 @@ $candidates = $this->db->query($query)->result();
 
                                 </div>
 
-                                <p style="text-align: center;">
-                                    Design and Developed By <strong> <i>Navid Aziz</i></strong> # 0324 4424424
-                                </p>
+
                             </div>
                         </div>
 
