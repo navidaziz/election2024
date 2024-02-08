@@ -221,7 +221,7 @@ $candidates = $this->db->query($query)->result();
                     <div class="col-md-8">
                         <div class="block_div">
                             <h4>Polling Station Wise Result Updates</h4>
-                            <marquee onmouseover="this.stop();" onmouseout="this.start();" direction="up" style="height: 600px;">
+                            <marquee onmouseover="this.stop();" onmouseout="this.start();" direction="up" style="height: 661px;">
                                 <div class="list-group">
                                     <?php
                                     $query = "SELECT s.polling_station, s.polling_station_id, 
